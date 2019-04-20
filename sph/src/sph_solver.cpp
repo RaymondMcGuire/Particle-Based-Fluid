@@ -5,23 +5,22 @@
 
 #include "constants.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846f
-#endif
-
 using namespace std;
 using namespace Constants;
 
 struct Rect
 {
-    float top;
     float left;
+    float top;
     float width;
     float height;
 };
 
 SPHSolver::SPHSolver()
 {
+	currentTime = 0.0f;
+	//data["frames"] = nlohmann::json::array();
+
     int particlesX = NUMBER_PARTICLES / 2.0f;
     int particlesY = NUMBER_PARTICLES;
 
@@ -31,9 +30,10 @@ SPHSolver::SPHSolver()
     float width = WIDTH / 4.2f;
     float height = 3.0f * HEIGHT / 4.0f;
 
-    Rect particleRect = Rect{(HEIGHT - height, WIDTH - width) / 2, width, height};
-    float left = 0;
-    float top = 0;
+    Rect particleRect = Rect{ (WIDTH - width) / 2, HEIGHT - height, width, height};
+
+	cout << "Particle Radius:" << 0.5f * PARTICLE_SPACING * SCALE << endl;
+	cout << "Rect Width:" << RENDER_WIDTH << ", Height:" << RENDER_HEIGHT << endl;
 
     float dx = particleRect.width / particlesX;
     float dy = particleRect.height / particlesY;
@@ -43,7 +43,7 @@ SPHSolver::SPHSolver()
         for (int j = 0; j < NUMBER_PARTICLES; j++)
         {
             Vector2<float> pos = Vector2<float>(particleRect.left, particleRect.top) + Vector2<float>(i * dx, j * dy);
-
+			
             Particle p = Particle(pos);
             particles.push_back(p);
         }
@@ -56,13 +56,13 @@ SPHSolver::SPHSolver()
 
 void SPHSolver::update(float dt)
 {
+	//record(dt);
     findNeighborhoods();
     calculateDensity();
     calculatePressure();
     calculateForceDensity();
     integrationStep(dt);
     collisionHandling();
-
     grid.updateStructure(particles);
 }
 
@@ -104,17 +104,14 @@ void SPHSolver::findNeighborhoods()
     neighborhoods = vector<vector<int>>();
     float maxDist2 = KERNEL_RANGE * KERNEL_RANGE;
 
-    for
-        each(const Particle &p in particles)
+    for each(const Particle &p in particles)
         {
             vector<int> neighbors = vector<int>();
             vector<Cell> neighboringCells = grid.getNeighboringCells(p.position);
 
-        for
-            each(const Cell &cell in neighboringCells)
+        for each(const Cell &cell in neighboringCells)
             {
-            for
-                each(int index in cell)
+            for each(int index in cell)
                 {
                     Vector2<float> x = p.position - particles[index].position;
                     float dist2 = x.x * x.x + x.y * x.y;
@@ -201,6 +198,28 @@ void SPHSolver::integrationStep(float dt)
         particles[i].velocity += particles[i].force / particles[i].density * dt;
         particles[i].position += particles[i].velocity * dt;
     }
+
+}
+
+void SPHSolver::record(float dt)
+{
+	nlohmann::json f;
+	f["time"] = currentTime;
+	f["particles"] = nlohmann::json::array();
+	for (int i = 0; i < numberParticles; i++)
+	{
+		nlohmann::json p;
+		//p["velocity"]["x"] = particles[i].velocity.x;
+		//p["velocity"]["y"] = particles[i].velocity.y;
+		p["position"]["x"] = particles[i].position.x * SCALE;
+		p["position"]["y"] = particles[i].position.y * SCALE;
+		//cout << particles[i].position.x << "_" << particles[i].position.y << endl;
+		f["particles"].push_back(p);
+	}
+	data["frames"].push_back(f);
+
+	cout<<"Recorded Frame:"<< currentTime << endl;
+	currentTime += dt;
 }
 
 void SPHSolver::collisionHandling()

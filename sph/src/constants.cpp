@@ -2,6 +2,10 @@
 
 namespace Constants
 {
+
+const float M_PI= 3.14159265358979323846f;
+
+
 const float WIDTH = 3;
 const float HEIGHT = 1.5;
 
@@ -13,6 +17,7 @@ const int RENDER_HEIGHT = SCALE * HEIGHT;
 const float WINDOW_SCALE = 1.0f;
 
 const float TIMESTEP = 0.0001f;
+const float MAX_TIME = 1.0f;
 
 const int NUMBER_PARTICLES = 70;
 

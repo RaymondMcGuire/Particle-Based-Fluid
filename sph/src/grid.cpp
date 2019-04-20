@@ -1,9 +1,9 @@
-#include "Grid.h"
+#include "grid.h"
 
 #include <iostream>
 #include <cmath>
 
-#include "Constants.h"
+#include "constants.h"
 
 using namespace std;
 

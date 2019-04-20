@@ -3,19 +3,23 @@
 
 #include <vector>
 
-#include "Particle.h"
-#include "Grid.h"
+#include"json.hpp"
+#include "particle.h"
+#include "grid.h"
 
 class SPHSolver
 {
 public:
-    SPHSolver();
+	nlohmann::json data;
+	int numberParticles;
+	std::vector<Particle> particles;
 
+	float currentTime;
+
+    SPHSolver();
     void update(float dt);
 
 private:
-    int numberParticles;
-    std::vector<Particle> particles;
     std::vector<std::vector<int>> neighborhoods;
     Grid grid;
 
@@ -31,6 +35,7 @@ private:
     void calculateForceDensity();
 
     void integrationStep(float dt);
+	void record(float dt);
 
     void collisionHandling();
 };

@@ -1,0 +1,4 @@
+1.cannot run ¡®rc.exe'
+
+¡¸C:\Program Files (x86)\Windows Kits\10\bin\_xxx_version\x64¡¹copy¡¸rc.exe¡¹and¡¸rcdll.dll¡¹
+ ->¡¸C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin¡¹

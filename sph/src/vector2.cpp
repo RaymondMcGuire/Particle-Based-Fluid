@@ -125,7 +125,7 @@ Vector2<T> &Vector2<T>::operator*=(const T &right)
 template <typename T>
 Vector2<T> &Vector2<T>::operator/=(const T &right)
 {
-    if (right.x != 0 && right.y != 0)
+    if (right!= 0)
     {
         x /= right;
         y /= right;
