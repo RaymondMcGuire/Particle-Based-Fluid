@@ -1,4 +1,4 @@
-#pbs_sph3 config
+#pbs_render config
 cmake_minimum_required(VERSION 3.2.2)
 
 set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -10,10 +10,10 @@ include_directories("${GLOBAL_DIR}/extlib/include")
 link_directories("${GLOBAL_DIR}/extlib/lib")
 
 include_directories("${LIBRARY_OUTPUT_PATH}")
-file(GLOB_RECURSE SPH3_FILES
+file(GLOB_RECURSE SPHRENDER_FILES
 	"${PROJECT_INCLUDE_DIR}/*.h"
 	"${PROJECT_SOURCE_DIR}/*.cpp"
 )
 
-add_executable(pbs_sph3 ${SPH3_FILES})
-target_link_libraries(pbs_sph3 pbsMathLib opengl32 glew32s glfw3)
+add_executable(pbs_render ${SPHRENDER_FILES})
+target_link_libraries(pbs_render pbsMathLib opengl32 glew32s glfw3)

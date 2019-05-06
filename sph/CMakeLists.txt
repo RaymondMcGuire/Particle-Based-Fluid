@@ -10,10 +10,8 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 #global include
 set(GLOBAL_DIR ${PROJECT_SOURCE_DIR})
-#set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
-#include_directories("${PROJECT_INCLUDE_DIR}")
-#include_directories("${PROJECT_SOURCE_DIR}")
 
 #subproject setting
 add_subdirectory(pbsMathLib)
 add_subdirectory(pbs_sph3)
+add_subdirectory(pbs_render)
