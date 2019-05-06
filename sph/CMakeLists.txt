@@ -1,17 +1,19 @@
-cmake_minimum_required(VERSION 2.8)
-project(demo_sph CXX)
+#Particle Based Simulation Project Settings
+cmake_minimum_required(VERSION 3.2.2)
+project(pbs C CXX)
+set(CMAKE_BUILD_TYPE Debug)
 
-include_directories(
-	"${PROJECT_SOURCE_DIR}/extlib"
-	"${PROJECT_SOURCE_DIR}/include"
-)
+#binary dir/ output file
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/out)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
-link_directories("${PROJECT_SOURCE_DIR}/lib")
+#global include
+set(GLOBAL_DIR ${PROJECT_SOURCE_DIR})
+#set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+#include_directories("${PROJECT_INCLUDE_DIR}")
+#include_directories("${PROJECT_SOURCE_DIR}")
 
-file(GLOB_RECURSE sph_FILES
-	"${PROJECT_SOURCE_DIR}/include/*.h"
-	"${PROJECT_SOURCE_DIR}/src/*.cpp"
-)
-
-add_executable(demo_sph ${sph_FILES})
-target_link_libraries(demo_sph freeglut glew32)
+#subproject setting
+add_subdirectory(pbsMathLib)
+add_subdirectory(pbs_sph3)

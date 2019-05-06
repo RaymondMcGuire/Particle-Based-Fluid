@@ -1,0 +1,24 @@
+#ifndef _Grid_
+#define _Grid_
+
+#include <vector>
+#include "Particle.h"
+
+typedef std::vector<int> Cell;
+
+class Grid
+{
+public:
+    Grid();
+
+    void updateStructure(std::vector<Particle> &particles);
+
+    std::vector<Cell> getNeighboringCells(Vector2<float> position);
+
+private:
+    int numberCellsX;
+    int numberCellsY;
+
+    std::vector<std::vector<Cell>> cells;
+};
+#endif
