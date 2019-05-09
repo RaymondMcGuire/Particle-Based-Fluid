@@ -1,6 +1,4 @@
 /sph/build
 /.vscode
-/sph/dll
-/sph/lib
 /warning
 /tutorial_cmake
