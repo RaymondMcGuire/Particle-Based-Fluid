@@ -1,6 +1,7 @@
 #ifndef _Vector3_H
 #define _Vector3_H
 
+#include <assert.h>
 #include <iostream>
 
 template <typename T>
