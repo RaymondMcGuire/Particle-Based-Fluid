@@ -5,10 +5,6 @@ set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set (PROJECT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 include_directories("${PROJECT_INCLUDE_DIR}")
-
-include_directories("${GLOBAL_DIR}/extlib/include")
-link_directories("${GLOBAL_DIR}/extlib/lib")
-
 include_directories("${LIBRARY_OUTPUT_PATH}")
 file(GLOB_RECURSE SPH3_FILES
 	"${PROJECT_INCLUDE_DIR}/*.h"
@@ -16,4 +12,4 @@ file(GLOB_RECURSE SPH3_FILES
 )
 
 add_executable(pbs_sph3 ${SPH3_FILES})
-target_link_libraries(pbs_sph3 pbsMathLib opengl32 glew32s glfw3)
+target_link_libraries(pbs_sph3 pbs_mathlib)

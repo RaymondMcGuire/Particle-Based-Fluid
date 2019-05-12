@@ -16,4 +16,4 @@ file(GLOB_RECURSE SPHMODEL_FILES
 )
 
 add_executable(pbs_model ${SPHMODEL_FILES})
-target_link_libraries(pbs_model pbsMathLib opengl32 glew32s glfw3)
+target_link_libraries(pbs_model pbs_mathlib opengl32 glew32s glfw3)

@@ -11,9 +11,11 @@ public:
 	float currentTime;
 
     SPH3Solver();
+	vector<Vector3<float>> GetParticlesPos();
 
 private:
 	SPH3Data* sph3_data;
+	
 };
 
 #endif

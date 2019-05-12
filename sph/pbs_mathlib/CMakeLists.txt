@@ -8,5 +8,5 @@ file(GLOB_RECURSE pbsMathLib_FILES
 	"${PROJECT_SOURCE_DIR}/*.cpp"
 )
 
-add_library(pbsMathLib STATIC ${pbsMathLib_FILES})
-target_include_directories(pbsMathLib PUBLIC ${PROJECT_INCLUDE_DIR})
+add_library(pbs_mathlib STATIC ${pbsMathLib_FILES})
+target_include_directories(pbs_mathlib PUBLIC ${PROJECT_INCLUDE_DIR})

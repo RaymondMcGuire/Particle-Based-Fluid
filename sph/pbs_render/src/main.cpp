@@ -17,18 +17,24 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "sph3_solver.h"
+
 #define MESH_FILE "models/sphere.obj"
 #define VERTEX_SHADER_FILE "shaders/test_vs.glsl"
 #define FRAGMENT_SHADER_FILE "shaders/test_fs.glsl"
-#define NUM_SPHERES 4
-
+//SPH
+SPH3Solver sph3 = SPH3Solver();
+vector<Vector3<float>> particlesPos = sph3.GetParticlesPos();
+unsigned int NUM_SPHERES = particlesPos.size();
 // camera matrices. it's easier if they are global
 mat4 view_mat;
 mat4 proj_mat;
 vec3 cam_pos( 0.0f, 0.0f, 5.0f );
 // a world position for each sphere in the scene
-vec3 sphere_pos_wor[]     = { vec3( -2.0, 0.0, 0.0 ), vec3( 2.0, 0.0, 0.0 ), vec3( -2.0, 0.0, -2.0 ), vec3( 1.5, 1.0, -1.0 ) };
-const float sphere_radius = 0.1f;
+vec3 *sphere_pos_wor = new vec3[NUM_SPHERES];
+
+const float sphere_radius = 0.01f;
 // indicates which sphere is selected
 int g_selected_sphere = -1;
 
@@ -126,6 +132,10 @@ void update_perspective() {
 }
 
 int main() {
+  for(int i = 0; i < NUM_SPHERES; i++)
+  {
+    sphere_pos_wor[i] = vec3(particlesPos[i].x,particlesPos[i].y,particlesPos[i].z);
+  }
   /*--------------------------------START
    * OPENGL--------------------------------*/
   restart_gl_log();
@@ -181,7 +191,7 @@ int main() {
 
   /*---------------------------SET RENDERING DEFAULTS---------------------------*/
   // unique model matrix for each sphere
-  mat4 model_mats[NUM_SPHERES];
+  mat4 *model_mats= new mat4[NUM_SPHERES];
   for ( int i = 0; i < NUM_SPHERES; i++ ) { model_mats[i] = translate( identity_mat4(), sphere_pos_wor[i] ); }
 
   glEnable( GL_DEPTH_TEST );          // enable depth-testing

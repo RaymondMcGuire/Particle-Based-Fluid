@@ -7,5 +7,5 @@ out float dist;
 
 void main() {
 	gl_Position = proj * view * model * vec4 (vertex_position, 1.0);
-	dist = vertex_position.z*10.0;//1.0 - (-pos_eye.z / 10.0);
+	dist = vertex_position.z*100.0;//1.0 - (-pos_eye.z / 10.0);
 }

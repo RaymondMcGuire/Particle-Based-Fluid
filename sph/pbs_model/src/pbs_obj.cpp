@@ -85,7 +85,7 @@ bool PbsObj::Save(string file_name,
 
 	file.open(file_name.c_str());
 	if(!file || !file.is_open() || file.bad() || file.fail()){
-		cout << "rxOBJ::Save : Invalid file specified" << endl;
+		cout << "Please confirm your use the right path" << endl;
 		return false;
 	}
 

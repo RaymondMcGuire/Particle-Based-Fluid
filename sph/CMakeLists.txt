@@ -12,7 +12,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(GLOBAL_DIR ${PROJECT_SOURCE_DIR})
 
 #subproject setting
-add_subdirectory(pbsMathLib)
+add_subdirectory(pbs_mathlib)
 add_subdirectory(pbs_sph3)
 add_subdirectory(pbs_render)
 add_subdirectory(pbs_model)

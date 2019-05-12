@@ -19,4 +19,4 @@ file(GLOB_RECURSE SPHRENDER_FILES
 file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
 file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/models DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
 add_executable(pbs_render ${SPHRENDER_FILES})
-target_link_libraries(pbs_render pbsMathLib opengl32 glew32s glfw3)
+target_link_libraries(pbs_render pbs_mathlib opengl32 glew32s glfw3)
