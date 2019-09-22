@@ -1,5 +1,5 @@
-#ifndef DETAIL_VECTOR2_INL_H_
-#define DETAIL_VECTOR2_INL_H_
+#ifndef _DETAIL_VECTOR2_INL_H_
+#define =_DETAIL_VECTOR2_INL_H_
 
 
 template <typename T>
