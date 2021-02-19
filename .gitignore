@@ -1,0 +1,9 @@
+build
+.vscode
+db_pbr
+/cmake/checkCUDA/compile/*
+!/cmake/checkCUDA/compile/.gitkeep
+/export/screenshots/*.png
+/export/screenshots/*.jpg
+/export/bgeo/**/*.bgeo
+/**/*.pyc
