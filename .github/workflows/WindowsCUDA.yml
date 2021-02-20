@@ -1,5 +1,5 @@
 # Windows builds.
-name: Windows
+name: WindowsCUDA
 
 on:
   push:
@@ -54,6 +54,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         ssh-key: ${{ secrets.KIRI_SSH }}
+        ssh-known-hosts: ${{ secrets.KIRI_KNOWN_HOSTS }}
     
     - name: Checkout submodules
       shell: bash
