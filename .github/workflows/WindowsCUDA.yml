@@ -52,6 +52,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ssh-key: ${{ secrets.KIRI_SSH }}
     
     - name: Checkout submodules
       shell: bash
