@@ -1,7 +1,7 @@
 /*
  * @Author: Xu.WANG
  * @Date: 2020-10-18 01:10:38
- * @LastEditTime: 2021-02-19 17:29:39
+ * @LastEditTime: 2021-02-20 20:40:42
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \SPH_CUDA\configuration\root_directory.h.in
@@ -13,6 +13,6 @@
 const char *const ROOT_PATH = "${CMAKE_SOURCE_DIR}";
 const char *const EXPORT_PATH = "${CMAKE_SOURCE_DIR}/export/";
 const char *const MSWIN_BUILD_PATH = "${CMAKE_SOURCE_DIR}/build/bin/";
-const char *const DB_PBR_PATH = "${CMAKE_SOURCE_DIR}/assets/";
+const char *const DB_PBR_PATH = "${CMAKE_SOURCE_DIR}/resources/";
 
 #endif

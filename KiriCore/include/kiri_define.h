@@ -1,10 +1,10 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-18 01:04:15
- * @LastEditTime: 2021-02-20 19:41:33
+ * @LastEditTime: 2021-02-20 20:33:38
  * @LastEditors: Xu.WANG
  * @Description: 
- * @FilePath: \KiriCore\include\kiri_define.h
+ * @FilePath: \SPH_CUDA\KiriCore\include\kiri_define.h
  */
 
 #ifndef _KIRI_DEFINE_H_
