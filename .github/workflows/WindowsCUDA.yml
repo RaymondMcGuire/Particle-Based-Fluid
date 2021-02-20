@@ -6,7 +6,7 @@ on:
     paths:
       - "**"
       - "!.github/**"
-      - ".github/workflows/Windows.yml"
+      - ".github/workflows/WindowsCUDA.yml"
   # pull_request:
   #   paths:
   #     - "**"
