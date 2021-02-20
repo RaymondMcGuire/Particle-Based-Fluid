@@ -52,15 +52,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
       with:
-        key: ${{ secrets.KIRI_SSH }}
-        known_hosts: ${{ secrets.KIRI_KNOWN_HOSTS }}
-    - name: rsync over ssh
-      run: rsync ./foo/ user@remote:bar/
-  
+        ssh-known-hosts:${{ secrets.KIRI_SSH }}
+        ssh-known-hosts:${{ secrets.KIRI_KNOWN_HOSTS }}
+
     - name: Checkout submodules
       shell: bash
       run: |
