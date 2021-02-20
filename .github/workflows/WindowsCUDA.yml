@@ -53,8 +53,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ssh-known-hosts:${{ secrets.KIRI_SSH }}
-        ssh-known-hosts:${{ secrets.KIRI_KNOWN_HOSTS }}
+        ssh-key: ${{ secrets.KIRI_SSH }}
+        ssh-known-hosts: ${{ secrets.KIRI_KNOWN_HOSTS }}
 
     - name: Checkout submodules
       shell: bash
