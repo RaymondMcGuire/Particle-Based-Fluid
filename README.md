@@ -42,3 +42,9 @@ cmake .. -G"Visual Studio 16 2019" -A x64
 | --- | --- |
 | SPH | ![knurling](docs/gif/sph_atf.gif) | 
 | WCSPH | ![knurling](docs/gif/wcsph_atf.gif) | 
+
+## Papers implemented
+
+ * Müller, Matthias, David Charypar, and Markus H. Gross. "Particle-based fluid simulation for interactive applications." Symposium on Computer animation. 2003.
+ * Becker, Markus, and Matthias Teschner. "Weakly compressible SPH for free surface flows." Proceedings of the 2007 ACM SIGGRAPH/Eurographics symposium on Computer animation. 2007.
+ * Akinci, Nadir, et al. "Versatile rigid-fluid coupling for incompressible SPH." ACM Transactions on Graphics (TOG) 31.4 (2012): 1-8.
