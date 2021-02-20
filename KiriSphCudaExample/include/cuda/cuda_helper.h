@@ -37,9 +37,9 @@ namespace KIRI
         return data;
     }
 
-    inline vector<float3> KiriArrVec4FToVecFloat3(const Array1Vec4F arr)
+	inline std::vector<float3> KiriArrVec4FToVecFloat3(const Array1Vec4F arr)
     {
-        vector<float3> data;
+        std::vector<float3> data;
         for (size_t i = 0; i < arr.size(); i++)
         {
 
@@ -58,9 +58,9 @@ namespace KIRI
         return data;
     }
 
-    inline vector<float3> KiriVertexToVecFloat3(const Array1<VertexFull> arr)
+    inline std::vector<float3> KiriVertexToVecFloat3(const Array1<VertexFull> arr)
     {
-        vector<float3> data;
+        std::vector<float3> data;
         for (size_t i = 0; i < arr.size(); i++)
         {
 
@@ -69,9 +69,9 @@ namespace KIRI
         return data;
     }
 
-    inline vector<uint3> KiriIndicesToFaces(const Array1<UInt> arr)
+    inline std::vector<uint3> KiriIndicesToFaces(const Array1<UInt> arr)
     {
-        vector<uint3> data;
+        std::vector<uint3> data;
         for (size_t i = 0; i < arr.size(); i += 3)
         {
             data.emplace_back(make_uint3(arr[i], arr[i + 1], arr[i + 2]));

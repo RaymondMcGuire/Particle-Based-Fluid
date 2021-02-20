@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-26 17:26:05
- * @LastEditTime: 2021-02-19 11:19:44
+ * @LastEditTime: 2021-02-20 01:26:08
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \Kiri\KiriExamples\src\template\template_pbs.cpp
@@ -17,7 +17,7 @@ namespace KIRI
 
         mName = Name;
         mSceneConfigData = ImportBinaryFile(mName);
-        mScene.Clear();
+        mScene->Clear();
         auto &app = KiriApplication::Get();
         app.PopCurrentLayer();
         app.PushLayer(app.ExamplesList()[app.CurrentExampleName()]);
@@ -25,7 +25,7 @@ namespace KIRI
 
     void KiriTemplatePBS::SetParticleVBOWithRadius(UInt PosVBO, UInt ColorVBO, UInt Number)
     {
-        mFluidRenderSystem.setParticlesVBOWithRadius(PosVBO, ColorVBO, Number);
+        mFluidRenderSystem->SetParticlesVBOWithRadius(PosVBO, ColorVBO, Number);
     }
 
     Vec_Char KiriTemplatePBS::ImportBinaryFile(String const &Name)
@@ -46,8 +46,8 @@ namespace KIRI
 
     void KiriTemplatePBS::OnAttach()
     {
-        mScene.enableCubeSkybox(true, "pool_2k");
-        mFluidRenderSystem.setSkyBox(mScene.getCubeSkybox()->getEnvCubeMap());
+        mScene->enableCubeSkybox(true, "pool_2k");
+        mFluidRenderSystem->SetSkyBoxTex(mScene->getCubeSkybox()->getEnvCubeMap());
 
         SetupPBSParams();
         SetupPBSScene();
@@ -58,19 +58,19 @@ namespace KIRI
         //KIRI_LOG_TRACE("Delta Time {0}, ms: {1}, fps: {2}", DeltaTime.GetSeconds(), DeltaTime.GetMilliSeconds(), DeltaTime.GetFps());
         OnPBSUpdate(DeltaTime);
 
-        mCamera.OnUpdate(DeltaTime);
+        mCamera->OnUpdate(DeltaTime);
         KIRI::KiriRenderer::BeginScene(mCamera);
 
         mFrameBuffer.Bind();
         mFrameBuffer.EnableDepthTest();
 
         // render scene
-        //mScene.renderShadow();
+        //mScene->renderShadow();
         KIRI::KiriRendererCommand::SetViewport(Vector4F(0.f, 0.f, (float)mWidth, (float)mHeight));
         KIRI::KiriRendererCommand::SetClearColor(Vector4F(0.1f, 0.1f, 0.1f, 1.f));
         KIRI::KiriRendererCommand::Clear();
-        mScene.renderCubeSkybox();
-        mScene.render();
+        mScene->renderCubeSkybox();
+        mScene->render();
 
         mFrameBuffer.DisableDepthTest();
         mFrameBuffer.Release();
@@ -78,7 +78,7 @@ namespace KIRI
         KIRI::KiriRendererCommand::SetViewport(Vector4F(0.f, 0.f, (float)mWidth, (float)mHeight));
         KIRI::KiriRendererCommand::SetClearColor(Vector4F(0.1f, 0.1f, 0.1f, 1.f));
         KIRI::KiriRendererCommand::Clear();
-        mFluidRenderSystem.renderFluid(mFrameBuffer.TextureColorBuffer(), mFrameBuffer.TextureDepthBuffer());
+        mFluidRenderSystem->renderFluid(mFrameBuffer.TextureColorBuffer(), mFrameBuffer.TextureDepthBuffer());
 
         KIRI::KiriRenderer::EndScene();
     }

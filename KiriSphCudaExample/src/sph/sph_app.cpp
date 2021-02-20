@@ -1,10 +1,10 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-27 00:49:33
- * @LastEditTime: 2021-02-19 17:19:06
+ * @LastEditTime: 2021-02-20 01:26:23
  * @LastEditors: Xu.WANG
  * @Description: 
- * @FilePath: \SPH_CUDA\KiriSphCuda\src\sph\sph_app.cpp
+ * @FilePath: \Kiri\KiriExamples\src\sph\sph_app.cpp
  */
 
 #include <sph/sph_app.h>
@@ -65,7 +65,7 @@ namespace KIRI
 
         // camera data
         auto camera_data = scene_data->camera();
-        mCamera.setYawPitchPos(camera_data->yaw(), camera_data->pitch(), FbsToKiri(*camera_data->position()));
+        mCamera->SetYawPitchPos(camera_data->yaw(), camera_data->pitch(), FbsToKiri(*camera_data->position()));
 
         // init volume data
         auto init_volume = scene_config_data->init_volume();
@@ -141,8 +141,8 @@ namespace KIRI
 
         // ssf data
         auto ssf_data = scene_config_data->renderer_data();
-        mFluidRenderSystem.enableFluidTransparentMode(ssf_data->fluid_transparent_mode());
-        mFluidRenderSystem.enableSoildParticleMode(ssf_data->soild_particle_mode());
+        mFluidRenderSystem->EnableFluidTransparentMode(ssf_data->fluid_transparent_mode());
+        mFluidRenderSystem->EnableSoildSsfMode(ssf_data->soild_particle_mode());
 
         // render particles
         SetParticleVBOWithRadius(mSystem->PositionsVBO(), mSystem->ColorsVBO(), mSystem->Size());
@@ -165,31 +165,31 @@ namespace KIRI
         float3 world_size = CUDA_BOUNDARY_PARAMS.world_size;
 
         // pre-computed map
-        UInt irradianceCubeMap = mScene.getCubeSkybox()->getIrradianceCubeMap();
-        UInt specCubeMap = mScene.getCubeSkybox()->getSpecularCubeMap();
-        UInt brdfLUTTexure = mScene.getCubeSkybox()->getBrdfLutTexture();
+        UInt irradianceCubeMap = mScene->getCubeSkybox()->getIrradianceCubeMap();
+        UInt specCubeMap = mScene->getCubeSkybox()->getSpecularCubeMap();
+        UInt brdfLUTTexure = mScene->getCubeSkybox()->getBrdfLutTexture();
 
         uint id = 0;
         // floor
-        KiriPlanePtr plane = make_shared<KiriPlane>(100.0f, CUDA_BOUNDARY_PARAMS.lowest_point.y, Vector3F(0.0f, 1.0f, 0.0f));
-        KiriPBRTexturePtr roomtile = make_shared<KiriPBRTexture>("tile");
+        KiriPlanePtr plane = std::make_shared<KiriPlane>(100.0f, CUDA_BOUNDARY_PARAMS.lowest_point.y, Vector3F(0.0f, 1.0f, 0.0f));
+        KiriPBRTexturePtr roomtile = std::make_shared<KiriPBRTexture>("tile");
         roomtile->Load();
 
         // floor material
-        KiriMaterialPBRIBLTexPtr m_roomtile = make_shared<KiriMaterialPBRIBLTex>(
+        KiriMaterialPBRIBLTexPtr m_roomtile = std::make_shared<KiriMaterialPBRIBLTex>(
             irradianceCubeMap, specCubeMap, brdfLUTTexure, roomtile);
-        m_roomtile->setPointLights(mScene.getPointLights());
-        plane->resetModelMatrix();
-        KiriEntityPtr entity_roomtile = make_shared<KiriEntity>(id++, plane, m_roomtile);
+        m_roomtile->SetPointLights(mScene->getPointLights());
+		plane->ResetModelMatrix();
+        KiriEntityPtr entity_roomtile = std::make_shared<KiriEntity>(id++, plane, m_roomtile);
 
         // wall(no material)
-        KiriBoxPtr boxModel = make_shared<KiriBox>(Vector3F(world_center.x, world_center.y, world_center.z), world_size.x, world_size.y, world_size.z);
-        boxModel->setWireFrame(true);
-        KiriMaterialLampPtr m_debug = make_shared<KiriMaterialLamp>();
-        KiriEntityPtr entity_debug = make_shared<KiriEntity>(id++, boxModel, m_debug);
+        KiriBoxPtr boxModel = std::make_shared<KiriBox>(Vector3F(world_center.x, world_center.y, world_center.z), world_size.x, world_size.y, world_size.z);
+        boxModel->SetWireFrame(true);
+        KiriMaterialLampPtr m_debug = std::make_shared<KiriMaterialLamp>();
+        KiriEntityPtr entity_debug = std::make_shared<KiriEntity>(id++, boxModel, m_debug);
 
-        mScene.add(entity_roomtile);
-        mScene.add(entity_debug);
+        mScene->add(entity_roomtile);
+        mScene->add(entity_debug);
     }
 
     void KiriSphApp::OnImguiRender()
@@ -217,6 +217,8 @@ namespace KIRI
 
                 if (ImGui::CollapsingHeader("Simulation"))
                 {
+                    //ImGui::Checkbox("Emit Particles", &SPH_DEM_DEMO_PARAMS.EmitParticles);
+
                     if (ImGui::Button("Reset Simulation"))
                     {
                         SSF_DEMO_PARAMS.resetSSF = true;

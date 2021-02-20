@@ -1,7 +1,7 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-26 15:25:05
- * @LastEditTime: 2020-11-24 02:52:12
+ * @LastEditTime: 2021-02-20 01:38:49
  * @LastEditors: Xu.WANG
  * @Description: 
  * @FilePath: \Kiri\KiriExamples\include\template\template_pbs.h
@@ -18,17 +18,26 @@ namespace KIRI
     public:
         KiriTemplatePBS()
             : KiriLayer("KiriTemplatePBS"),
-              mCamera(Vector3F(0.0f, 0.0f, 3.0f), Vector3F(0.0f, 0.0f, 1.0f), Vector3F(0.0f, 1.0f, 0.0f), 45.0f, 1280.f / 720.f),
-              mScene(1280.f, 720.f), mFrameBuffer(1280.f, 720.f), mFluidRenderSystem(1280.f, 720.f) {}
+              mFrameBuffer(1280, 720)
+        {
+            mCamera = std::make_shared<KiriCameraFPC>(CameraProperty(Vector3F(0.0f, 0.0f, 3.0f), Vector3F(0.0f, 0.0f, 1.0f), Vector3F(0.0f, 1.0f, 0.0f), 45.0f, 1280.f / 720.f));
+            mScene = std::make_shared<KiriScene>(1280, 720, mCamera);
+        }
 
         KiriTemplatePBS(String Name, UInt WindowWidth, UInt WindowHeight)
             : KiriLayer(Name),
-              mCamera(Vector3F(0.0f, 0.0f, 3.0f), Vector3F(0.0f, 0.0f, 1.0f), Vector3F(0.0f, 1.0f, 0.0f), 45.0f, (float)WindowWidth / (float)WindowHeight),
-              mScene(WindowWidth, WindowHeight), mFrameBuffer(WindowWidth, WindowHeight), mFluidRenderSystem(WindowWidth, WindowHeight),
-              mWidth(WindowWidth), mHeight(WindowHeight)
+              mFrameBuffer(WindowWidth, WindowHeight),
+              mWidth(WindowWidth),
+              mHeight(WindowHeight)
         {
+            mCamera = std::make_shared<KiriCameraFPC>(CameraProperty(Vector3F(0.0f, 0.0f, 3.0f), Vector3F(0.0f, 0.0f, 1.0f), Vector3F(0.0f, 1.0f, 0.0f), 45.0f, (float)WindowWidth / (float)WindowHeight));
+            mScene = std::make_shared<KiriScene>(WindowWidth, WindowHeight, mCamera);
+            mFluidRenderSystem = std::make_shared<KiriFluidRenderSystem>(WindowWidth, WindowHeight, mCamera);
+
             mSceneConfigData = ImportBinaryFile(Name);
         }
+
+        virtual ~KiriTemplatePBS() noexcept {};
 
     protected:
         virtual void OnAttach() override;
@@ -43,9 +52,9 @@ namespace KIRI
         void SetParticleVBOWithRadius(UInt PosVBO, UInt ColorVBO, UInt Number);
 
         Vec_Char mSceneConfigData;
-        KiriCameraFPC mCamera;
-        KiriScene mScene;
-        KiriFluidRenderSystem mFluidRenderSystem;
+        KiriCameraFPCPtr mCamera;
+        KiriScenePtr mScene;
+        KiriFluidRenderSystemPtr mFluidRenderSystem;
 
         UInt mSimCount = 0;
 
