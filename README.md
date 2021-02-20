@@ -5,5 +5,5 @@
 ## Gallery
 | Example | GIF |
 | --- | --- |
-| SPH | ![knurling](docs/gif/sph_atf) | 
-| WCSPH | ![knurling](docs/gif/wcsph_atf) | 
+| SPH | ![knurling](docs/gif/sph_atf.gif) | 
+| WCSPH | ![knurling](docs/gif/wcsph_atf.gif) | 
