@@ -1,37 +1,50 @@
-## Welcome to GitHub Pages
+# SPH_CUDA
 
-You can use the [editor on GitHub](https://github.com/RaymondMcGuire/SPH_CUDA/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+[![WindowsCUDA](https://github.com/RaymondMcGuire/SPH_CUDA/actions/workflows/WindowsCUDA.yml/badge.svg?branch=master)](https://github.com/RaymondMcGuire/SPH_CUDA/actions/workflows/WindowsCUDA.yml)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Screen Space Fluid + SPH/WCSPH(CUDA version).
 
-### Markdown
+## Environment
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- C++ & CUDA10.2
+- Install [CUDA](https://developer.nvidia.com/cuda-downloads) and [Cmake](https://cmake.org/download/) first
 
-```markdown
-Syntax highlighted code block
+## Setup
 
-# Header 1
-## Header 2
-### Header 3
+### Command Line
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```rb
+cd /to/your/project/path
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+```rb
+mkdir build
+```
 
-### Jekyll Themes
+```rb
+cd build
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/RaymondMcGuire/SPH_CUDA/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```rb
+cmake .. -G"Visual Studio 16 2019" -A x64
+```
 
-### Support or Contact
+### Scripts
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+#### For Windows
+
+- cd to ./scripts folder
+- choose your visual studio version(vs15/vs17/vs19)
+- run the bat file
+
+## Gallery
+| Example | GIF |
+| --- | --- |
+| SPH | ![knurling](docs/gif/sph_atf.gif) | 
+| WCSPH | ![knurling](docs/gif/wcsph_atf.gif) | 
+
+## Papers implemented
+
+ * Müller, Matthias, David Charypar, and Markus H. Gross. "Particle-based fluid simulation for interactive applications." Symposium on Computer animation. 2003.
+ * Becker, Markus, and Matthias Teschner. "Weakly compressible SPH for free surface flows." Proceedings of the 2007 ACM SIGGRAPH/Eurographics symposium on Computer animation. 2007.
+ * Akinci, Nadir, et al. "Versatile rigid-fluid coupling for incompressible SPH." ACM Transactions on Graphics (TOG) 31.4 (2012): 1-8.
