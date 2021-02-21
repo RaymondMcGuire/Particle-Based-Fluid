@@ -38,12 +38,10 @@ cmake .. -G"Visual Studio 16 2019" -A x64
 - run the bat file
 
 ## Gallery
-|**Example**|
-|-----|
-| SPH | 
-| ![SPH](docs/gif/sph_atf.gif) | 
-| WCSPH |
-| ![WCSPH](docs/gif/wcsph_atf.gif) | 
+- SPH 
+![SPH](docs/gif/sph_atf.gif) 
+- WCSPH
+![WCSPH](docs/gif/wcsph_atf.gif)
 
 ## Papers implemented
 
