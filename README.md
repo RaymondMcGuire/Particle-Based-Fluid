@@ -40,8 +40,8 @@ cmake .. -G"Visual Studio 16 2019" -A x64
 ## Gallery
 | Example | GIF |
 | --- | --- |
-| SPH | ![knurling](docs/gif/sph_atf.gif) | 
-| WCSPH | ![knurling](docs/gif/wcsph_atf.gif) | 
+| SPH | ![SPH](docs/gif/sph_atf.gif) | 
+| WCSPH | ![WCSPH](docs/gif/wcsph_atf.gif) | 
 
 ## Papers implemented
 
