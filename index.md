@@ -39,7 +39,7 @@ cmake .. -G"Visual Studio 16 2019" -A x64
 
 ## Gallery
 | Example |
-| :---:|
+|:---:|
 | SPH | 
 |![SPH](docs/gif/sph_atf.gif) | 
 | WCSPH |
