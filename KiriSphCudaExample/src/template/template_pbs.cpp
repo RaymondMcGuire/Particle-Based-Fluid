@@ -1,10 +1,10 @@
 /*** 
  * @Author: Xu.WANG
  * @Date: 2020-10-26 17:26:05
- * @LastEditTime: 2021-02-20 01:26:08
+ * @LastEditTime: 2021-02-22 11:32:57
  * @LastEditors: Xu.WANG
  * @Description: 
- * @FilePath: \Kiri\KiriExamples\src\template\template_pbs.cpp
+ * @FilePath: \SPH_CUDA\KiriSphCudaExample\src\template\template_pbs.cpp
  */
 #include <template/template_pbs.h>
 namespace KIRI
@@ -30,7 +30,7 @@ namespace KIRI
 
     Vec_Char KiriTemplatePBS::ImportBinaryFile(String const &Name)
     {
-        String importPath = String(EXPORT_PATH) + "sceneconfig/" + Name + ".bin";
+        String importPath = String(DB_PBR_PATH) + "sceneconfig/" + Name + ".bin";
 
         if (RELEASE && PUBLISH)
         {
