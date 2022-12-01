@@ -1,10 +1,10 @@
 /*
  * @Author: Xu.WANG
  * @Date: 2020-10-18 01:10:38
- * @LastEditTime: 2021-02-20 20:40:42
- * @LastEditors: Xu.WANG
- * @Description: 
- * @FilePath: \SPH_CUDA\configuration\root_directory.h.in
+ * @LastEditTime: 2022-10-22 15:18:57
+ * @LastEditors: Xu.WANG raymondmgwx@gmail.com
+ * @Description:
+ * @FilePath: \Kiri\configuration\root_directory.h.in
  */
 #pragma once
 #ifndef _KIRI_GLOBRL_FILE_PATH_
@@ -12,7 +12,7 @@
 
 const char *const ROOT_PATH = "${CMAKE_SOURCE_DIR}";
 const char *const EXPORT_PATH = "${CMAKE_SOURCE_DIR}/export/";
-const char *const MSWIN_BUILD_PATH = "${CMAKE_SOURCE_DIR}/build/bin/";
+const char *const MSWIN_BUILD_PATH = "${CMAKE_SOURCE_DIR}/@BUILD_STRING@/bin/";
 const char *const DB_PBR_PATH = "${CMAKE_SOURCE_DIR}/resources/";
 
 #endif

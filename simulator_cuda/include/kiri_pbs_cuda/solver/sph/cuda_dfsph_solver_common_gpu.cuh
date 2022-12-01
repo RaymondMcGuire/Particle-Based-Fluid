@@ -1,0 +1,193 @@
+/***
+ * @Author: Xu.WANG raymondmgwx@gmail.com
+ * @Date: 2022-07-27 10:50:17
+ * @LastEditors: Xu.WANG raymondmgwx@gmail.com
+ * @LastEditTime: 2022-08-15 17:53:25
+ * @FilePath: \Kiri\KiriPBSCuda\include\kiri_pbs_cuda\solver\sph\cuda_dfsph_solver_common_gpu.cuh
+ * @Description:
+ * @Copyright (c) 2022 by Xu.WANG raymondmgwx@gmail.com, All Rights Reserved.
+ */
+
+#ifndef _CUDA_DFSPH_SOLVER_COMMON_GPU_CUH_
+#define _CUDA_DFSPH_SOLVER_COMMON_GPU_CUH_
+
+#pragma once
+
+#include <kiri_pbs_cuda/kiri_pbs_pch.cuh>
+
+namespace KIRI
+{
+
+  template <typename GradientFunc>
+  __device__ void _ComputeAlpha(
+      float *alpha,
+      float3 *grad_pi,
+      const size_t i,
+      const float3 *pos,
+      const float *mass,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+    while (j < cellEnd)
+    {
+
+      float3 grad_pj = mass[j] * nablaW(pos[i] - pos[j]);
+      *alpha += lengthSquared(grad_pj);
+      *grad_pi += grad_pj;
+
+      ++j;
+    }
+    return;
+  }
+
+  template <typename GradientFunc>
+  __device__ void
+  _ComputeBoundaryAlpha(
+      float3 *grad_pi,
+      const float3 posi,
+      const float3 *bpos,
+      const float *volume,
+      const float rho0,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+    while (j < cellEnd)
+    {
+      *grad_pi += rho0 * volume[j] * nablaW(posi - bpos[j]);
+      ++j;
+    }
+    return;
+  }
+
+  template <typename GradientFunc>
+  __device__ void _ComputeDivergenceError(
+      float *error,
+      const size_t i,
+      const float3 *pos,
+      const float *mass,
+      const float3 *vel,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+    while (j < cellEnd)
+    {
+      *error += mass[j] * dot((vel[i] - vel[j]), nablaW(pos[i] - pos[j]));
+      ++j;
+    }
+
+    return;
+  }
+
+  template <typename GradientFunc>
+  __device__ void _ComputeDivergenceErrorBoundary(
+      float *error,
+      const float3 posi,
+      const float3 veli,
+      const float3 *bpos,
+      const float *volume,
+      const float rho0,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+    while (j < cellEnd)
+    {
+      *error += rho0 * volume[j] * dot(veli, nablaW(posi - bpos[j]));
+      ++j;
+    }
+    return;
+  }
+
+  template <typename GradientFunc>
+  __device__ void _AdaptVelocitiesByDivergence(
+      float3 *v,
+      const size_t i,
+      const float *stiff,
+      const float3 *pos,
+      const float *mass,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+
+    while (j < cellEnd)
+    {
+      *v += mass[j] * (stiff[i] + stiff[j]) * nablaW(pos[i] - pos[j]);
+      ++j;
+    }
+
+    return;
+  }
+
+  template <typename GradientFunc>
+  __device__ void
+  _AdaptVelocitiesBoundaryByDivergence(
+      float3 *v,
+      const float3 posi,
+      const float stiffi,
+      const float3 *bpos,
+      const float *volume,
+      const float rho0,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+    while (j < cellEnd)
+    {
+      *v += rho0 * volume[j] * stiffi * nablaW(posi - bpos[j]);
+      ++j;
+    }
+    return;
+  }
+
+  template <typename GradientFunc>
+  __device__ void _AdaptVelocitiesByPressure(
+      float3 *v,
+      const size_t i,
+      const float *stiff,
+      const float3 *pos,
+      const float *mass,
+      const float dt,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+    float inv_h = 1.f / dt;
+    while (j < cellEnd)
+    {
+      *v += inv_h * mass[j] * (stiff[i] + stiff[j]) * nablaW(pos[i] - pos[j]);
+      ++j;
+    }
+
+    return;
+  }
+
+  template <typename GradientFunc>
+  __device__ void
+  _AdaptVelocitiesBoundaryByPressure(
+      float3 *v,
+      const float3 posi,
+      const float stiffi,
+      const float3 *bpos,
+      const float *volume,
+      const float rho0,
+      const float dt,
+      size_t j,
+      const size_t cellEnd,
+      GradientFunc nablaW)
+  {
+    float inv_h = 1.f / dt;
+    while (j < cellEnd)
+    {
+      *v += inv_h * rho0 * volume[j] * stiffi * nablaW(posi - bpos[j]);
+      ++j;
+    }
+    return;
+  }
+
+} // namespace KIRI
+
+#endif /* _CUDA_DFSPH_SOLVER_COMMON_GPU_CUH_ */

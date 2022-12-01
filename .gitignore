@@ -1,9 +1,13 @@
 build
+build_cuda
 .vscode
 db_pbr
+db2022
 /cmake/checkCUDA/compile/*
 !/cmake/checkCUDA/compile/.gitkeep
-/export/screenshots/*.png
-/export/screenshots/*.jpg
+/export/screenshots/**/*.png
+/export/screenshots/**/*.jpg
 /export/bgeo/**/*.bgeo
+/export/obj/**/*.obj
+/export/ply/**/*.ply
 /**/*.pyc
