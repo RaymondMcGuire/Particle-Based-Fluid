@@ -1,4 +1,4 @@
-# Particle-Based Fluid Toolkit
+# Particle-Based Fluid
 
 [![WindowsCUDA](https://github.com/RaymondMcGuire/Particle-Based-Fluid-Toolkit/actions/workflows/WindowsCUDA.yml/badge.svg?branch=master)](https://github.com/RaymondMcGuire/Particle-Based-Fluid-Toolkit/actions/workflows/WindowsCUDA.yml)
 
