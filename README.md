@@ -2,7 +2,7 @@
 
 [![WindowsCUDA](https://github.com/RaymondMcGuire/Particle-Based-Fluid-Toolkit/actions/workflows/WindowsCUDA.yml/badge.svg?branch=master)](https://github.com/RaymondMcGuire/Particle-Based-Fluid-Toolkit/actions/workflows/WindowsCUDA.yml)
 
-This project implemented several SPH-related papers using CUDA, including Weakly compressible SPH (SCA2007), Position based fluid (SIGGRAPH2013), Implicit incompressible SPH (TVCG2014), Divergence-free SPH (SCA2015), Volume fraction-based multiple-fluid (SIGGRAPH2014) and Helmholtz free energy based multiple-fluid (SIGGRAPH2015).
+This project implemented several SPH-related papers using CUDA, including Weakly Compressible SPH (SCA2007), Position-based Fluid (SIGGRAPH2013), Implicit Incompressible SPH (TVCG2014), Divergence-free SPH (SCA2015), Volume Fraction-based Multiple-fluid (SIGGRAPH2014) and Helmholtz Free Energy based Multiple-fluid (SIGGRAPH2015).
 
 ## Environment
 
