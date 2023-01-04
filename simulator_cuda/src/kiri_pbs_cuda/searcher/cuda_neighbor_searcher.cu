@@ -21,6 +21,8 @@
 #include <kiri_pbs_cuda/particle/cuda_multisph_yan16_particles.cuh>
 #include <kiri_pbs_cuda/particle/cuda_pbf_particles.cuh>
 
+#include <thrust/sort.h>
+
 namespace KIRI
 {
 
